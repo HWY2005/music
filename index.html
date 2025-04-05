@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>音乐作品展示</title>
+    <style>
+        body {
+            background: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* 唱片容器 */
+        .vinyl-container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            margin: 50px 0;
+        }
+
+        /* 旋转唱片 */
+        .vinyl {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-image: url('background.jpg'); /* 替换为你的照片路径 */
+            background-size: cover;
+            animation: rotate 3s linear infinite;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* 控制按钮样式 */
+        audio {
+            margin-top: 30px;
+        }
+
+        /* 唱片旋转动画 */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 暂停状态 */
+        .paused {
+            animation-play-state: paused !important;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white;">我的音乐作品</h1>
+    
+    <div class="vinyl-container">
+        <div class="vinyl" id="vinyl"></div>
+    </div>
+
+    <audio controls id="player" src="song1.mp3"></audio> <!-- 替换音乐文件路径 -->
+
+    <script>
+        const player = document.getElementById('player');
+        const vinyl = document.getElementById('vinyl');
+
+        // 播放状态变化监听
+        player.addEventListener('play', () => {
+            vinyl.classList.remove('paused');
+        });
+
+        player.addEventListener('pause', () => {
+            vinyl.classList.add('paused');
+        });
+
+        // 初始加载暂停状态
+        vinyl.classList.add('paused');
+    </script>
+</body>
+</html>
